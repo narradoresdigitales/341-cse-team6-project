@@ -2,6 +2,7 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
+    //#swagger.tags=['Events']
     try {
         const result = await mongodb.getDatabase().db().collection('events').find();
         const events = await result.toArray();
@@ -14,6 +15,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+    //#swagger.tags=['Events']
     try {
         const eventId = new ObjectId(req.params.id);
         const result = await mongodb.getDatabase().db().collection('events').find({ _id: eventId});
@@ -25,7 +27,40 @@ const getSingle = async (req, res) => {
     }
 };
 
+const createEvent = async (req, res) => {
+ //#swagger.tags=['Events']
+    try {
+        const event = {
+            title: req.body.title,
+            description: req.body.description,
+            date: req.body.date,
+            location: req.body.location,
+            organizer: req.body.organizer,
+            attendees: req.body.attendees || [],
+            createAt: new Date()
+        };
+
+        const response = await mongodb.getDatabase().db().collection('events').insertOne(event);
+
+        if (response.acknowledge) {
+            res.status(201).json({ message: 'Event created successfully', id: response.insertedId});
+        } else {
+            res.status(500).json({ message: 'Failed to create event'});
+        }
+    } catch {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
+
+
+
+
 module.exports = {
     getAll,
-    getSingle
+    getSingle,
+    createEvent,
+    //updateEvent,
+    //deleteEvent
 }
