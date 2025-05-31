@@ -1,0 +1,58 @@
+[
+    {
+    "_id": "683b156b1aeea694ff051595",
+    "title": "Annual Tech Conference",
+    "description": "A conference to discuss emerging technologies and networking opportunities.",
+    "date": "2025-09-12T09:00:00Z",
+    "location": "Grand Convention Center, Hall B",
+    "organizer": "Tech Innovators Inc.",
+    "attendees": [
+        "juan@example.com",
+        "curtis@example.com",
+        "israel@example.com"
+    ],
+    "createdAt": "2025-05-31T10:30:00Z"
+    },
+    {
+    "_id": "683b17231aeea694ff051596",
+    "title": "Monthly Developer Meetup",
+    "description": "A monthly gathering of developers to share knowledge and network.",
+    "date": "2025-10-15T18:00:00Z",
+    "location": "Downtown Community Hall, Room 101",
+    "organizer": "Local Dev Group",
+    "attendees": [
+        "ben@example.com",
+        "juan@example.com",
+        "curtis@example.com"
+    ],
+    "createdAt": "2025-06-01T14:00:00Z"
+    },
+    {
+    "_id": "683b2a3403c166d3b6b0dd39",
+    "title": "Annual Tech Conference",
+    "description": "A conference to discuss emerging technologies and networking opportunities.",
+    "date": "2025-09-12T09:00:00Z",
+    "location": "Grand Convention Center, Hall B",
+    "organizer": "Tech Innovators Inc.",
+    "attendees": [
+        "juan@example.com",
+        "curtis@example.com",
+        "israel@example.com"
+    ],
+    "createAt": "2025-05-31T16:11:32.538Z"
+    },
+    {
+    "_id": "683b3365868b5b1cdf8c9476",
+    "title": "Monthly Gaming Meetup",
+    "description": "A monthly gathering of gamers to hang out and play videogames.",
+    "date": "2025-10-15T18:00:00Z",
+    "location": "Downtown Community Hall, Room 101",
+    "organizer": "Local Dev Group",
+    "attendees": [
+        "ben@example.com",
+        "juan@example.com",
+        "curtis@example.com"
+    ],
+    "createdAt": "2025-05-31T16:50:45.265Z"
+    }
+]
