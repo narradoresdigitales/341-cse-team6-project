@@ -1,0 +1,19 @@
+{
+  "name": "341-cse-team6-project",
+  "version": "1.0.0",
+  "description": "Team 6 Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/narradoresdigitales/341-cse-team6-project.git"
+  },
+  "author": "Ben, Juan, Curtis, Israel, Marcus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/narradoresdigitales/341-cse-team6-project/issues"
+  },
+  "homepage": "https://github.com/narradoresdigitales/341-cse-team6-project#readme"
+}
