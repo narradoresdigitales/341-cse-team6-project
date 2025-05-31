@@ -7,7 +7,13 @@ const getAll = async (req, res) => {
         const result = await mongodb.getDatabase().db().collection('events').find();
         const events = await result.toArray();
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(events);
+
+        if (events.length === 0) {
+            res.status(404).json({ message: 'No events found'});
+        } else {
+            res.status(200).json(events);  
+        }
+        
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -21,7 +27,13 @@ const getSingle = async (req, res) => {
         const result = await mongodb.getDatabase().db().collection('events').find({ _id: eventId});
         const events = await result.toArray();
         res.setHeader('Content-Type', 'application/json');
+
+        if (!events[0]) {
+            return res.status(404).json({ message: 'Event not found'})
+        }
         res.status(200).json(events[0]);
+
+        
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -37,7 +49,7 @@ const createEvent = async (req, res) => {
             location: req.body.location,
             organizer: req.body.organizer,
             attendees: req.body.attendees || [],
-            createAt: new Date()
+            createdAt: new Date()
         };
 
         const response = await mongodb.getDatabase().db().collection('events').insertOne(event);
@@ -47,7 +59,7 @@ const createEvent = async (req, res) => {
         } else {
             res.status(500).json({ message: 'Failed to create event'});
         }
-    } catch {
+    } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
