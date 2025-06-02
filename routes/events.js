@@ -14,8 +14,8 @@ router.get('/:id', eventsController.getSingle);
 
 router.post('/', validateEvent, handleValidationErrors, eventsController.createEvent);
 
-//router.put('/:id', eventsController.updateEvent);
+router.put('/:id', eventsController.updateEvent);
 
-//router.delete('/:id', eventsController.deleteEvent);
+router.delete('/:id', eventsController.deleteEvent);
 
 module.exports = router;
