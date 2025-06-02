@@ -65,7 +65,8 @@ const createEvent = async (req, res) => {
 };
 
 const updateEvent = async (req, res) => {
-    //#swagger.tags=['Events]
+    //#swagger.tags=['Events']
+    console.log('Request body:', req.body);
     try {
         const eventId = new ObjectId(req.params.id);
         const updatedEvent = {
@@ -74,7 +75,11 @@ const updateEvent = async (req, res) => {
             date: req.body.date,
             location: req.body.location,
             organizer: req.body.organizer,
-            attendees: req.body.attendees || [],
+            attendees: Array.isArray(req.body.attendees)
+                ? req.body.attendees
+                : typeof req.body.attendees === 'string'
+                ? [req.body.attendees]
+                : [],
         };
 
     const response = await mongodb.getDatabase().db().collection('events').updateOne(
