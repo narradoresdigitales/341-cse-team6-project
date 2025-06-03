@@ -1,4 +1,4 @@
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 
 const validateEvent = [
     body('title')
@@ -33,6 +33,58 @@ const validateEvent = [
         .isString().withMessage('Each attendee must be a string'),
 ];
 
+const validateEventId = [
+    param('id')
+        .isString().withMessage('Event ID must be a string')
+        .notEmpty().withMessage('Event ID is required'),
+];
+
+const validateUpdateEvent = [
+    body('title')
+        .optional()
+        .isString().withMessage('Title must be a string')
+        .trim()
+        .notEmpty().withMessage('Title cannot be empty'),
+
+    body('description')
+        .optional()
+        .isString().withMessage('Description must be a string')
+        .trim()
+        .notEmpty().withMessage('Description cannot be empty'),
+
+    body('date')
+        .optional()
+        .isISO8601().withMessage('Date must be a valid ISO 8601 string'),
+
+    body('location')
+        .optional()
+        .isString().withMessage('Location must be a string')
+        .trim()
+        .notEmpty().withMessage('Location cannot be empty'),
+
+    body('organizer')
+        .optional()
+        .isString().withMessage('Organizer must be a string')
+        .trim()
+        .notEmpty().withMessage('Organizer cannot be empty'),
+
+    body('attendees')
+        .optional()
+        .isArray().withMessage('Attendees must be an array'),
+
+    body('attendees.*')
+        .optional()
+        .isString().withMessage('Each attendee must be a string'),
+];
+
+
+
+
+
+
+
 module.exports = {
-    validateEvent
+    validateEvent,
+    validateEventId,
+    validateUpdateEvent
 };
