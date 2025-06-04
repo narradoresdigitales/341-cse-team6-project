@@ -1,12 +1,22 @@
-const router = require('express').Router()
+const passport = require('passport');
+
+const router = require('express').Router();
 
 router.use('/', require('./swagger'));
 
-router.get('/', (req, res) => { 
-    //#swagger.tags=['341CSE Team 6 Project']
-    res.send('341CSE Team 6 Project');
-});
-
 router.use('/events', require('./events'));
+
+// login route
+router.get('/login', passport.authenticate('github'));
+
+//logout route
+router.get('/logout', function (req, res, next) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
+});
 
 module.exports = router;
