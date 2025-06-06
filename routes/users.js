@@ -18,7 +18,6 @@ router.get("/:id", getUserById);
 router.post("/", createUser);
 
 // Route to update user
-// In your routes/users.js
 router.put(
   "/:id",
   /* 
