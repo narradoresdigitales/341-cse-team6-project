@@ -64,14 +64,13 @@ const createUser = async (req, res) => {
 
 // Update a user
 const updateUser = async (req, res) => {
-  //#swagger.tags=['Users']
   try {
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
 
     if (!updatedUser) {
-      res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
     res.status(200).json({ message: "User updated successfully", updatedUser });
