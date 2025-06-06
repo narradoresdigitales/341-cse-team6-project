@@ -1,12 +1,15 @@
-require('dotenv').config();
-const mongodb = require('./data/database');
-const express = require('express');
-const bodyParser = require('body-parser');
+require("dotenv").config();
+const mongodb = require("./data/database");
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
-const cors = require('cors');
-const passport = require('passport');
-const session = require('express-session');
-const GitHubStrategy = require('passport-github2').Strategy;
+const cors = require("cors");
+const passport = require("passport");
+const session = require("express-session");
+const GitHubStrategy = require("passport-github2").Strategy;
+const { connectMongoose } = require("./data/mongooseConnection");
+
+connectMongoose();
 
 const port = process.env.PORT || 3000;
 
@@ -14,8 +17,8 @@ app
   .use(bodyParser.json())
   .use(
     session({
-      secret: 'secret',
-      resave: 'false',
+      secret: "secret",
+      resave: "false",
       saveUninitialized: true,
     })
   )
@@ -25,20 +28,20 @@ app
   .use(passport.session())
   //allow passport to use 'express-session'
   .use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Z-Key"
     );
     res.setHeader(
-      'Access-Control-Allow-Methods',
-      'GET, POST, PUT, DELETE, OPTIONS'
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS"
     );
     next();
   })
-  .use(cors({ methods: ['GET, POST, PUT, DELETE, OPTIONS'] }))
-  .use(cors({ origin: '*' }))
-  .use('/', require('./routes'));
+  .use(cors({ methods: ["GET, POST, PUT, DELETE, OPTIONS"] }))
+  .use(cors({ origin: "*" }))
+  .use("/", require("./routes"));
 
 // Passport
 passport.use(
@@ -64,7 +67,7 @@ passport.deserializeUser((user, done) => {
 });
 
 // Endpoints
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   // #swagger.tags=['341CSE Team 6 Project']
   const loginStatus =
     req.session.user !== undefined
@@ -75,19 +78,19 @@ app.get('/', (req, res) => {
 });
 
 app.get(
-  '/github/callback',
-  passport.authenticate('github', {
-    failureRedirect: '/api-docs',
+  "/github/callback",
+  passport.authenticate("github", {
+    failureRedirect: "/api-docs",
     session: false,
   }),
   (req, res) => {
     req.session.user = req.user;
-    res.redirect('/');
+    res.redirect("/");
   }
 );
 
 // Uncaught Exception Handler
-process.on('uncaughtException', (err, origin) => {
+process.on("uncaughtException", (err, origin) => {
   console.log(
     process.stderr.id,
     `Caught exception: ${err}\n` + `Exception origin: ${origin}`
