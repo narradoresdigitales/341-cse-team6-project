@@ -9,4 +9,6 @@ router.get('/', (req, res) => {
 
 router.use('/events', require('./events'));
 
+router.use('/sponsors', require('./sponsors'));
+
 module.exports = router;
