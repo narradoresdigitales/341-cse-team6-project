@@ -4,7 +4,8 @@
   "description": "Team 6 Project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
     "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
     "mongodb": "^6.16.0",
+    "mongoose": "^8.15.1",
+    "nodemon": "^3.1.10",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "swagger-autogen": "^2.23.7",
