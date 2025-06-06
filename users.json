@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Alice Johnson",
+    "username": "alicejohnson",
+    "githubId": null,
+    "email": "alice@example.com",
+    "password": "hashed_password_1",
+    "role": "admin",
+    "permissions": ["create_event", "manage_users", "send_invites"],
+    "events_created": [],
+    "invitations": []
+  },
+  {
+    "name": "Bob Martinez",
+    "username": "bobmartinez",
+    "githubId": null,
+    "email": "bob@example.com",
+    "password": "hashed_password_2",
+    "role": "editor",
+    "permissions": ["edit_event", "manage_invites"],
+    "events_created": [],
+    "invitations": []
+  },
+  {
+    "name": "Charlie Smith",
+    "username": "charliesmith",
+    "githubId": null,
+    "email": "charlie@example.com",
+    "password": "hashed_password_3",
+    "role": "attendant",
+    "permissions": ["view_event", "confirm_attendance"],
+    "events_created": [],
+    "invitations": []
+  }
+]
