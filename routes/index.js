@@ -20,4 +20,6 @@ router.get("/logout", function (req, res, next) {
   });
 });
 
+router.use('/sponsors', require('./sponsors'));
+
 module.exports = router;

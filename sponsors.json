@@ -1,0 +1,34 @@
+[
+    {
+        "_id": "684344e10179e0363a4bbe67",
+        "name": "Walmart",
+        "email": "email@example.com",
+        "phone": "(000)000-0000",
+        "website": "example-website.com",
+        "supplierID": "1111"
+    },
+    {
+        "_id": "68434399f3b1996c91a37076",
+        "name": "McDonald's",
+        "email": "email@example.com",
+        "phone": "(000)000-0000",
+        "website": "example-website.com",
+        "supplierID": "2222"
+    },
+    {
+        "_id": "6843466fb413ec6cdcdf4f43",
+        "name": "Microsoft",
+        "email": "email@example.com",
+        "phone": "(000)000-0000",
+        "website": "example-website.com",
+        "supplierID": "3333"
+    },
+    {
+        "_id": "68434692b413ec6cdcdf4f44",
+        "name": "Lenovo",
+        "email": "email@example.com",
+        "phone": "(000)000-0000",
+        "website": "example-website.com",
+        "supplierID": "4444"
+    }
+]
