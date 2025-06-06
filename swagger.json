@@ -8,8 +8,8 @@
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https",
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
     "/login": {
@@ -235,15 +235,6 @@
         }
       }
     },
-    "/sponsors/": {
-      "get": {
-        "tags": [
-          "Sponsors"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
     "/users/": {
       "get": {
         "tags": [
@@ -254,9 +245,6 @@
           "200": {
             "description": "OK"
           },
-          "404": {
-            "description": "Not Found"
-          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -264,7 +252,6 @@
       },
       "post": {
         "tags": [
-          "Sponsors"
           "Users"
         ],
         "description": "",
@@ -278,16 +265,6 @@
                 "name": {
                   "example": "any"
                 },
-                "email": {
-                  "example": "any"
-                },
-                "phone": {
-                  "example": "any"
-                },
-                "website": {
-                  "example": "any"
-                },
-                "supplierID": {
                 "username": {
                   "example": "any"
                 },
@@ -320,24 +297,12 @@
           "201": {
             "description": "Created"
           },
-          "400": {
-            "description": "Bad Request"
-          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       }
     },
-    "/sponsors/{id}": {
-      "get": {
-        "tags": [
-          "Sponsors"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
     "/users/{id}": {
       "get": {
         "tags": [
@@ -356,9 +321,6 @@
           "200": {
             "description": "OK"
           },
-          "400": {
-            "description": "Bad Request"
-          },
           "404": {
             "description": "Not Found"
           },
@@ -369,7 +331,6 @@
       },
       "put": {
         "tags": [
-          "Sponsors"
           "Users"
         ],
         "description": "",
@@ -378,7 +339,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
             "type": "string",
             "description": "User ID"
           },
@@ -391,19 +351,6 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "phone": {
-                  "example": "any"
-                },
-                "website": {
-                  "example": "any"
-                },
-                "supplierID": {
-                  "example": "any"
                   "type": "string",
                   "example": "string"
                 },
@@ -462,6 +409,178 @@
           "200": {
             "description": "OK"
           },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sponsors/": {
+      "get": {
+        "tags": [
+          "Sponsors"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sponsors"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "supplierID": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/sponsors/{id}": {
+      "get": {
+        "tags": [
+          "Sponsors"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Sponsors"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                },
+                "website": {
+                  "example": "any"
+                },
+                "supplierID": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
           "400": {
             "description": "Bad Request"
           },
@@ -476,7 +595,6 @@
       "delete": {
         "tags": [
           "Sponsors"
-          "Users"
         ],
         "description": "",
         "parameters": [
