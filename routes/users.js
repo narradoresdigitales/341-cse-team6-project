@@ -7,6 +7,7 @@ const {
   updateUser,
   deleteUser,
 } = require("../controllers/usersController");
+const { isAuthenticated } = require("../middleware/authenticate");
 
 // Route to get all users
 router.get("/", getUsers);
@@ -15,11 +16,12 @@ router.get("/", getUsers);
 router.get("/:id", getUserById);
 
 // Route to create new user
-router.post("/", createUser);
+router.post("/", isAuthenticated, createUser);
 
 // Route to update user
 router.put(
   "/:id",
+  isAuthenticated,
   /* 
     #swagger.tags = ['Users']
     #swagger.parameters['id'] = { description: 'User ID', in: 'path', required: true }
@@ -44,6 +46,6 @@ router.put(
 );
 
 // Route to delete a user
-router.delete("/:id", deleteUser);
+router.delete("/:id", isAuthenticated, deleteUser);
 
 module.exports = router;
