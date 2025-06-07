@@ -5,8 +5,8 @@ const doc = {
     title: "Event Management Api",
     description: "Event Management Api",
   },
-  host: "localhost:3000",
-  schemes: ["http", "https"],
+  host: "three41-cse-team6-project.onrender.com",
+  schemes: ["https"],
 };
 
 const outputFile = "./swagger.json";
