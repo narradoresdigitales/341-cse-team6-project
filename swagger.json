@@ -87,7 +87,7 @@
                 "location": {
                   "example": "any"
                 },
-                "organizer": {
+                "sponsor": {
                   "example": "any"
                 },
                 "attendees": {
@@ -175,7 +175,7 @@
                 "location": {
                   "example": "any"
                 },
-                "organizer": {
+                "sponsor": {
                   "example": "any"
                 },
                 "attendees": {

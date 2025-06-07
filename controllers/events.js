@@ -47,7 +47,7 @@ const createEvent = async (req, res) => {
       description: req.body.description,
       date: req.body.date,
       location: req.body.location,
-      organizer: req.body.organizer,
+      sponsor: req.body.sponsor,
       attendees: req.body.attendees || [],
       createdAt: new Date(),
     };
@@ -81,7 +81,7 @@ const updateEvent = async (req, res) => {
       description: req.body.description,
       date: req.body.date,
       location: req.body.location,
-      organizer: req.body.organizer,
+      sponsor: req.body.sponsor,
       attendees: Array.isArray(req.body.attendees)
         ? req.body.attendees
         : typeof req.body.attendees === 'string'
