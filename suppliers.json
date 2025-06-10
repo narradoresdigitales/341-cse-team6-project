@@ -1,0 +1,189 @@
+[
+    {
+    "_id": "72be28cd3b8c4e2a9a000001",
+    "companyName": "Elite Catering Co.",
+    "contactName": "Maya Thompson",
+    "email": "maya@elitecatering.com",
+    "phone": "555-2211",
+    "address": {
+    "street": "42 Market Street",
+    "city": "San Jose",
+    "state": "CA",
+    "postalCode": "95112",
+    "tax_id": "92-4712031",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "Buffet Catering",
+        "Beverage Service",
+        "Event Staffing (Servers)"
+    ],
+    "isActive": true,
+    "createdAt": "2025-06-01T08:15:00Z"
+    },
+
+    {
+    "_id": "72be28cd3b8c4e2a9a000002",
+    "companyName": "Modular Event Systems",
+    "contactName": "Daniel Reed",
+    "email": "daniel@modularevents.com",
+    "phone": "555-3344",
+    "address": {
+    "street": "112 Industrial Ave",
+    "city": "Oakland",
+    "state": "CA",
+    "postalCode": "94607",
+    "tax_id": "45-3091876",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "Stage Construction",
+        "Lighting Rigs",
+        "Audio/Visual Systems"
+    ],
+    "isActive": true,
+    "createdAt": "2025-06-01T09:00:00Z"
+    },
+
+    {
+    "_id": "72be28cd3b8c4e2a9a000003",
+    "companyName": "SecureNet Solutions",
+    "contactName": "Lana Davis",
+    "email": "lana@securenetsol.com",
+    "phone": "555-4488",
+    "address": {
+    "street": "77 Mission Blvd",
+    "city": "San Francisco",
+    "state": "CA",
+    "postalCode": "94105",
+    "tax_id": "73-6054012",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "On-Site Security Guards",
+        "Metal Detectors",
+        "Surveillance Cameras"
+    ],
+    "isActive": true,
+    "createdAt": "2025-06-01T10:25:00Z"
+    },
+
+    {
+    "_id": "72be28cd3b8c4e2a9a000004",
+    "companyName": "EventForce Staffing",
+    "contactName": "Carlos Nguyen",
+    "email": "carlos@eventforce.com",
+    "phone": "555-5599",
+    "address": {
+    "street": "18 Harbor Lane",
+    "city": "Sacramento",
+    "state": "CA",
+    "postalCode": "95814",
+    "tax_id": "38-2039847",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "Event Coordinators",
+        "Registration Assistants",
+        "Tech Support Crew"
+    ],
+    "isActive": true,
+    "createdAt": "2025-06-01T11:05:00Z"
+    },
+
+    {
+    "_id": "683b156b1aeea694ff051595",
+    "companyName": "Tech Innovators Inc.",
+    "contactName": "Morgan Lee",
+    "email": "support@techinnovators.com",
+    "phone": "555-8675",
+    "address": {
+    "street": "300 Silicon Parkway",
+    "city": "San Jose",
+    "state": "CA",
+    "postalCode": "95134",
+    "tax_id": "91-1083476",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "AV Equipment Rentals",
+        "Event Management",
+        "Booth Infrastructure Setup",
+        "Technical Staff"
+    ],
+    "isActive": true,
+    "createdAt": "2025-05-31T10:30:00Z"
+    },
+
+    {
+    "_id": "683b17231aeea694ff051596",
+    "companyName": "Local Dev Group",
+    "contactName": "Priya Nand",
+    "email": "admin@localdevgroup.org",
+    "phone": "555-3221",
+    "address": {
+    "street": "101 Code Lane",
+    "city": "San Mateo",
+    "state": "CA",
+    "postalCode": "94401",
+    "tax_id": "87-6540123",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "Speaker Coordination",
+        "Venue Booking",
+        "Developer Equipment Rental",
+        "Volunteer Staffing"
+    ],
+    "isActive": true,
+    "createdAt": "2025-06-01T14:00:00Z"
+    },
+
+    {
+    "_id": "683b2a3403c166d3b6b0dd39",
+    "companyName": "Tech Innovators Inc.",
+    "contactName": "Morgan Lee",
+    "email": "support@techinnovators.com",
+    "phone": "555-8675",
+    "address": {
+    "street": "300 Silicon Parkway",
+    "city": "San Jose",
+    "state": "CA",
+    "postalCode": "95134",
+    "tax_id": "91-1083476",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "AV Equipment Rentals",
+        "Event Management",
+        "Booth Infrastructure Setup",
+        "Technical Staff"
+    ],
+    "isActive": true,
+    "createdAt": "2025-05-31T16:11:32.538Z"
+    },
+
+    {
+    "_id": "683b3365868b5b1cdf8c9476",
+    "companyName": "Local Dev Group",
+    "contactName": "Priya Nand",
+    "email": "admin@localdevgroup.org",
+    "phone": "555-3221",
+    "address": {
+    "street": "101 Code Lane",
+    "city": "San Mateo",
+    "state": "CA",
+    "postalCode": "94401",
+    "tax_id": "87-6540123",
+    "country": "USA"
+    },
+    "productsSupplied": [
+        "Gaming Console Setup",
+        "LAN Party Hardware",
+        "Event Staff",
+        "Streaming Support"
+    ],
+    "isActive": true,
+    "createdAt": "2025-05-31T16:50:45.265Z"
+}
+]

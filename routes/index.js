@@ -1,11 +1,8 @@
 const passport = require("passport");
-
 const router = require("express").Router();
 
-router.use("/", require("./swagger"));
 
-router.use("/events", require("./events"));
-router.use("/users", require("./users"));
+
 
 // login route
 router.get("/login", passport.authenticate("github"));
@@ -20,6 +17,13 @@ router.get("/logout", function (req, res, next) {
   });
 });
 
+// Swagger docs
+router.use("/", require("./swagger"));
+
+// API routes
+router.use("/events", require("./events"));
+router.use("/users", require("./users"));
 router.use('/sponsors', require('./sponsors'));
+router.use('/suppliers', require('./suppliers')); 
 
 module.exports = router;
