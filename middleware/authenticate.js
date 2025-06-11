@@ -1,8 +1,20 @@
 const isAuthenticated = (req, res, next) => {
-  if (req.session.user === undefined) {
-    return res.status(401).json('Only admins can access this route.');
+  if (!req.session.user) {
+    return res.status(401).json('Authentication required.');
   }
   next();
 };
 
-module.exports = { isAuthenticated };
+const isAdmin = (req, res, next) => {
+  if (!req.session.user) {
+    return res.status(401).json({ message: 'Authentication required.' });
+  }
+
+  if (!req.session.user.isAdmin) {
+    return res.status(403).json({ message: 'Admin privileges required.' });
+  }
+
+  next();
+};
+
+module.exports = { isAuthenticated, isAdmin };

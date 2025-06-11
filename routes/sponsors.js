@@ -1,15 +1,44 @@
 const router = require('express').Router();
 const sponsorsController = require('../controllers/sponsors');
-const { validateSponsorId, validateSponsor } = require('../middleware/sponsorValidator');
+const {
+  validateSponsorId,
+  validateSponsor,
+} = require('../middleware/sponsorValidator');
 const handleValidationErrors = require('../middleware/validateResult');
+const { isAdmin } = require('../middleware/authenticate');
 
 router.get('/', sponsorsController.getAll);
-router.get('/:id', validateSponsorId, handleValidationErrors, sponsorsController.getSingle);
+router.get(
+  '/:id',
+  isAdmin,
+  validateSponsorId,
+  handleValidationErrors,
+  sponsorsController.getSingle
+);
 
-router.post('/', validateSponsor, handleValidationErrors, sponsorsController.createSponsor);
+router.post(
+  '/',
+  isAdmin,
+  validateSponsor,
+  handleValidationErrors,
+  sponsorsController.createSponsor
+);
 
-router.put('/:id', validateSponsorId, validateSponsor, handleValidationErrors, sponsorsController.updateSponsor);
+router.put(
+  '/:id',
+  isAdmin,
+  validateSponsorId,
+  validateSponsor,
+  handleValidationErrors,
+  sponsorsController.updateSponsor
+);
 
-router.delete('/:id', validateSponsorId, handleValidationErrors, sponsorsController.deleteSponsor);
+router.delete(
+  '/:id',
+  isAdmin,
+  validateSponsorId,
+  handleValidationErrors,
+  sponsorsController.deleteSponsor
+);
 
 module.exports = router;

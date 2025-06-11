@@ -8,12 +8,13 @@ const {
   validateUpdateEvent,
 } = require('../middleware/eventValidator');
 const handleValidationErrors = require('../middleware/validateResult');
-const { isAuthenticated } = require('../middleware/authenticate');
+const { isAuthenticated, isAdmin } = require('../middleware/authenticate');
 
-router.get('/', eventsController.getAll);
+router.get('/', isAuthenticated, eventsController.getAll);
 
 router.get(
   '/:id',
+  isAuthenticated,
   validateEventId,
   handleValidationErrors,
   eventsController.getSingle
@@ -21,7 +22,7 @@ router.get(
 
 router.post(
   '/',
-  isAuthenticated,
+  isAdmin,
   validateEvent,
   handleValidationErrors,
   eventsController.createEvent
@@ -29,7 +30,7 @@ router.post(
 
 router.put(
   '/:id',
-  isAuthenticated,
+  isAdmin,
   validateEventId,
   validateUpdateEvent,
   handleValidationErrors,
@@ -38,7 +39,7 @@ router.put(
 
 router.delete(
   '/:id',
-  isAuthenticated,
+  isAdmin,
   validateEventId,
   handleValidationErrors,
   eventsController.deleteEvent
