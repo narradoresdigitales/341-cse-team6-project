@@ -1,13 +1,14 @@
-require("dotenv").config();
-const mongodb = require("./data/database");
-const express = require("express");
-const bodyParser = require("body-parser");
+require('dotenv').config();
+const mongodb = require('./data/database');
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
-const cors = require("cors");
-const passport = require("passport");
-const session = require("express-session");
-const GitHubStrategy = require("passport-github2").Strategy;
-const { connectMongoose } = require("./data/mongooseConnection");
+const cors = require('cors');
+const passport = require('passport');
+const session = require('express-session');
+const GitHubStrategy = require('passport-github2').Strategy;
+const { connectMongoose } = require('./data/mongooseConnection');
+const User = require('./models/usersModel');
 
 connectMongoose();
 
@@ -17,8 +18,8 @@ app
   .use(bodyParser.json())
   .use(
     session({
-      secret: "secret",
-      resave: "false",
+      secret: 'secret',
+      resave: 'false',
       saveUninitialized: true,
     })
   )
@@ -28,20 +29,20 @@ app
   .use(passport.session())
   //allow passport to use 'express-session'
   .use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Z-Key"
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
     );
     res.setHeader(
-      "Access-Control-Allow-Methods",
-      "GET, POST, PUT, DELETE, OPTIONS"
+      'Access-Control-Allow-Methods',
+      'GET, POST, PUT, DELETE, OPTIONS'
     );
     next();
   })
-  .use(cors({ methods: ["GET, POST, PUT, DELETE, OPTIONS"] }))
-  .use(cors({ origin: "*" }))
-  .use("/", require("./routes"));
+  .use(cors({ methods: ['GET, POST, PUT, DELETE, OPTIONS'] }))
+  .use(cors({ origin: '*' }))
+  .use('/', require('./routes'));
 
 // Passport
 passport.use(
@@ -51,9 +52,39 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL,
     },
-    function (accessToken, refreshToken, profile, done) {
-      // accessToken and refreshToken are used by GitHub, even if the current function does not
-      return done(null, profile);
+    async function (accessToken, refreshToken, profile, done) {
+      try {
+        // Find user by GitHub ID
+        let user = await User.findOne({ githubId: profile.id });
+
+        if (!user) {
+          // Create a new user
+          user = new User({
+            githubId: profile.id,
+            username: profile.username,
+            displayName: profile.displayName || null,
+          });
+          await user.save();
+        } else {
+          // Update user if displayName is provided and has changed
+          let updated = false;
+
+          if (
+            profile.displayName !== null &&
+            profile.displayName !== user.displayName
+          ) {
+            user.displayName = profile.displayName;
+            updated = true;
+          }
+
+          if (updated) await user.save();
+        }
+
+        return done(null, user);
+      } catch (err) {
+        console.error('GitHub Strategy error:', err);
+        return done(err, null);
+      }
     }
   )
 );
@@ -67,7 +98,7 @@ passport.deserializeUser((user, done) => {
 });
 
 // Endpoints
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   // #swagger.tags=['341CSE Team 6 Project']
   const loginStatus =
     req.session.user !== undefined
@@ -78,19 +109,34 @@ app.get("/", (req, res) => {
 });
 
 app.get(
-  "/github/callback",
-  passport.authenticate("github", {
-    failureRedirect: "/api-docs",
+  '/github/callback',
+  passport.authenticate('github', {
+    failureRedirect: '/api-docs',
     session: false,
   }),
-  (req, res) => {
-    req.session.user = req.user;
-    res.redirect("/");
+  async (req, res) => {
+    try {
+      const user = await User.findOne({ githubId: req.user.githubId });
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found in DB' });
+      }
+      req.session.user = {
+        _id: user._id,
+        username: user.username,
+        isAdmin: user.isAdmin,
+      };
+
+      res.redirect('/');
+    } catch (err) {
+      console.error('Error in GitHub callback:', err);
+      res.status(500).json({ message: 'Internal server error during login' });
+    }
   }
 );
 
 // Uncaught Exception Handler
-process.on("uncaughtException", (err, origin) => {
+process.on('uncaughtException', (err, origin) => {
   console.log(
     process.stderr.id,
     `Caught exception: ${err}\n` + `Exception origin: ${origin}`

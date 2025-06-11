@@ -1,6 +1,21 @@
-
 const request = require('supertest');
-const app = require('../app');  
+const app = require('../app');
+
+// Bypass auth:
+jest.mock('../middleware/authenticate', () => ({
+  isAuthenticated: (req, res, next) => {
+    req.user = { id: 'mockUserId' };
+    next();
+  },
+  isAdmin: (req, res, next) => next(),
+}));
+
+// Bypass validation:
+jest.mock('../middleware/eventValidator', () => ({
+  validateEvent: (req, res, next) => next(),
+  validateEventId: (req, res, next) => next(),
+  validateUpdateEvent: (req, res, next) => next(),
+}));
 
 // Mock the database module with string _id values
 const { ObjectId } = require('mongodb'); // Add this line at top of your test file
@@ -43,8 +58,6 @@ jest.mock('../data/database', () => {
   };
 });
 
-
-
 describe('Events API', () => {
   it('GET /events - returns all events', async () => {
     const res = await request(app).get('/events');
@@ -61,7 +74,7 @@ describe('Events API', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty('_id');
     expect(res.body._id).toBe(testId);
-    expect(res.body).toHaveProperty('title'); 
+    expect(res.body).toHaveProperty('title');
   });
 
   it('GET /events/:id - returns 404 if event not found', async () => {

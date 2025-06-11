@@ -1,4 +1,6 @@
-const User = require("../models/usersModel");
+const User = require('../models/usersModel');
+const { ObjectId } = require('mongodb');
+const mongodb = require('../data/database');
 
 // Get all users from the Users database
 const getUsers = async (req, res) => {
@@ -7,7 +9,7 @@ const getUsers = async (req, res) => {
     const users = await User.find();
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch users." });
+    res.status(500).json({ error: 'Failed to fetch users.' });
   }
 };
 
@@ -17,11 +19,11 @@ const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
-      return res.status(404).json({ error: "User not found." });
+      return res.status(404).json({ error: 'User not found.' });
     }
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ error: "Error retrieving user." });
+    res.status(500).json({ error: 'Error retrieving user.' });
   }
 };
 
@@ -29,55 +31,49 @@ const getUserById = async (req, res) => {
 const createUser = async (req, res) => {
   //#swagger.tags=['Users']
   try {
-    const {
-      name,
-      username,
-      githubId,
-      email,
-      password,
-      role,
-      permissions,
-      events_created,
-      invitations,
-    } = req.body;
+    const { githubId, username, displayName, isAdmin = false } = req.body;
 
     const newUser = new User({
-      name,
-      username,
       githubId,
-      email,
-      password,
-      role,
-      permissions: permissions || [],
-      events_created: events_created || [],
-      invitations: invitations || [],
+      username,
+      displayName: displayName || null,
+      isAdmin: Boolean(isAdmin),
     });
 
     await newUser.save();
     res
       .status(201)
-      .json({ message: "User created successfully", user: newUser });
+      .json({ message: 'User created successfully', user: newUser });
   } catch (error) {
-    res.status(500).json({ message: "Error creating user", error });
+    res.status(500).json({ message: 'Error creating user', error });
   }
 };
 
 // Update a user
 const updateUser = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const userId = new ObjectId(String(req.params.id));
 
-    if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
+    const updatedUser = {
+      githubId: req.body.githubId,
+      username: req.body.username,
+      displayName: req.body.displayName,
+      isAdmin: req.body.isAdmin,
+    };
+
+    const response = await mongodb
+      .getDatabase()
+      .db()
+      .collection('users')
+      .updateOne({ _id: userId }, { $set: updatedUser });
+
+    if (response.matchedCount === 0) {
+      return res.status(404).json({ error: 'User not found' });
     }
 
-    res.status(200).json({ message: "User updated successfully", updatedUser });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Error updating user", details: error.message });
+    res.status(200).json({ message: 'User updated successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -88,14 +84,14 @@ const deleteUser = async (req, res) => {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
 
     if (!deleteUser) {
-      return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: 'User not found' });
     }
 
-    res.status(200).json({ message: "User deleted successfully" });
+    res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     res
       .status(500)
-      .json({ error: "Error deleting user", details: error.message });
+      .json({ error: 'Error deleting user', details: error.message });
   }
 };
 

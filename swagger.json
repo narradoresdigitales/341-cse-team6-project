@@ -258,35 +258,26 @@
           {
             "name": "body",
             "in": "body",
+            "description": "User fields to update",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
-                  "example": "any"
+                "githubId": {
+                  "type": "string",
+                  "example": "string"
                 },
                 "username": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "string"
                 },
-                "githubId": {
-                  "example": "any"
+                "displayName": {
+                  "type": "string",
+                  "example": "string"
                 },
-                "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                },
-                "role": {
-                  "example": "any"
-                },
-                "permissions": {
-                  "example": "any"
-                },
-                "events_created": {
-                  "example": "any"
-                },
-                "invitations": {
-                  "example": "any"
+                "isAdmin": {
+                  "type": "boolean",
+                  "example": false
                 }
               }
             }
@@ -349,7 +340,7 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "githubId": {
                   "type": "string",
                   "example": "string"
                 },
@@ -357,48 +348,13 @@
                   "type": "string",
                   "example": "string"
                 },
-                "githubId": {
+                "displayName": {
                   "type": "string",
                   "example": "string"
                 },
-                "email": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "password": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "role": {
-                  "type": "string",
-                  "example": "string"
-                },
-                "permissions": {
-                  "type": "array",
-                  "example": [
-                    "string"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "events_created": {
-                  "type": "array",
-                  "example": [
-                    "number"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "invitations": {
-                  "type": "array",
-                  "example": [
-                    "string"
-                  ],
-                  "items": {
-                    "type": "string"
-                  }
+                "isAdmin": {
+                  "type": "boolean",
+                  "example": false
                 }
               }
             }
