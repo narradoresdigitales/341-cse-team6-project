@@ -7,7 +7,7 @@ const {
 const handleValidationErrors = require('../middleware/validateResult');
 const { isAdmin } = require('../middleware/authenticate');
 
-router.get('/', sponsorsController.getAll);
+router.get('/', isAdmin, sponsorsController.getAll);
 router.get(
   '/:id',
   isAdmin,
