@@ -6,11 +6,11 @@ const doc = {
     description: "Event Management Api",
   },
   // COMMENT OUT LOCAL HOST TO PUBLISH ON RENDER.COM
-  //host: "three41-cse-team6-project.onrender.com",
-  host: "localhost:3000",
-  schemes: ["http"],
+  host: "three41-cse-team6-project.onrender.com",
+  //host: "localhost:3000",
+  //schemes: ["http"],
   // COMMENT OUT HTTP TO PUBLISH ON RENDER.COM
-  //schemes: ["https"],
+  schemes: ["https"],
 };
 
 const outputFile = "./swagger.json";
