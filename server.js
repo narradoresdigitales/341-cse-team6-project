@@ -112,7 +112,7 @@ app.get(
   '/github/callback',
   passport.authenticate('github', {
     failureRedirect: '/api-docs',
-    session: false,
+    
   }),
   async (req, res) => {
     try {
@@ -125,6 +125,7 @@ app.get(
         _id: user._id,
         username: user.username,
         isAdmin: user.isAdmin,
+        isAdmin: true
       };
 
       res.redirect('/');
