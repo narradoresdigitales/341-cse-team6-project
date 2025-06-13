@@ -20,6 +20,12 @@ const getAll = async (req, res) => {
 
 const getSingle = async (req, res) => {
     //#swagger.tags=['Sponsors']
+    const id = req.params.id;
+
+    if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid sponsor ID' });
+    }
+    
     try {
         const _id = new ObjectId(req.params.id);
         const result = await mongodb.getDatabase().db().collection('sponsors').find({ _id });

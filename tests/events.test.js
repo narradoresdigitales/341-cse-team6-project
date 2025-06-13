@@ -83,4 +83,13 @@ describe('Events API', () => {
     expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty('message', 'Event not found');
   });
+
+  it('GET /events/:id - returns 400 if ID format is invalid', async () => {
+  const invalidId = 'not-a-valid-id';
+  const res = await request(app).get(`/events/${invalidId}`);
+  expect(res.statusCode).toBe(400);
+  expect(res.body).toHaveProperty('message', 'Invalid event ID');
+});
+
+
 });

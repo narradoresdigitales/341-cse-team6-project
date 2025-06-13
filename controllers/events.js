@@ -20,6 +20,13 @@ const getAll = async (req, res) => {
 
 const getSingle = async (req, res) => {
   //#swagger.tags=['Events']
+  const id = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid event ID'});
+  }
+  
+  
   try {
     const eventId = new ObjectId(String(req.params.id));
     const result = await mongodb

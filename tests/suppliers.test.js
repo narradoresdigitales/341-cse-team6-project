@@ -88,4 +88,13 @@ describe('Suppliers API', () => {
     expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty('message', 'Supplier not found');
   });
+
+it('GET /suppliers/:id - returns 400 if ID format is invalid', async () => {
+  const invalidId = 'not-a-valid-id';
+  const res = await request(app).get(`/suppliers/${invalidId}`);
+  expect(res.statusCode).toBe(400);
+  expect(res.body).toHaveProperty('errors');
+  expect(res.body.errors[0]).toHaveProperty('msg', 'Invalid supplier ID format');
+  });
+
 });
