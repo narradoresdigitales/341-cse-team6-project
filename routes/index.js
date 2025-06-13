@@ -5,10 +5,18 @@ const router = require("express").Router();
 
 
 // login route
-router.get("/login", passport.authenticate("github"));
+router.get(
+  "/login", 
+  //#swagger.tags = ['OAuth']
+  //#swagger.summary = "Use Searchbar"
+  passport.authenticate("github")
+);
 
 //logout route
-router.get("/logout", function (req, res, next) {
+router.get("/logout", 
+  //#swagger.tags = ['OAuth']
+  //#swagger.summary = "Use Searchbar"
+  function (req, res, next) {
   req.logout(function (err) {
     if (err) {
       return next(err);

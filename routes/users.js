@@ -10,10 +10,22 @@ const {
 const { isAuthenticated, isAdmin } = require('../middleware/authenticate');
 
 // Route to get all users
-router.get('/', isAdmin, getUsers);
+router.get(
+  '/', 
+  //#swagger.tags = ['Users']
+  //#swagger.summary = "Requires Admin"
+  isAdmin, 
+  getUsers
+);
 
 // Route to get a user by Id
-router.get('/:id', isAdmin, getUserById);
+router.get(
+  '/:id', 
+  //#swagger.tags = ['Users']
+  //#swagger.summary = "Requires Admin"
+  isAdmin, 
+  getUserById
+);
 
 // Route to create new user
 router.post(
@@ -22,7 +34,7 @@ router.post(
     #swagger.tags = ['Users']
     #swagger.parameters['body'] = {
       in: 'body',
-      description: 'User fields to update',
+      description: 'User fields to use',
       required: true,
       schema: {
         githubId: "string",
@@ -40,6 +52,7 @@ router.put(
   '/:id',
   /* 
     #swagger.tags = ['Users']
+    #swagger.summary = "Requires Authentication"
     #swagger.parameters['id'] = { description: 'User ID', in: 'path', required: true }
     #swagger.parameters['body'] = {
       in: 'body',
@@ -58,6 +71,12 @@ router.put(
 );
 
 // Route to delete a user
-router.delete('/:id', isAdmin, deleteUser);
+router.delete(
+  '/:id', 
+  //#swagger.tags = ['Users']
+  //#swagger.summary = "Requires Admin"
+  isAdmin, 
+  deleteUser
+);
 
 module.exports = router;
