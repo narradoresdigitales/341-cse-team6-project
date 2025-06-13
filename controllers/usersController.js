@@ -1,6 +1,7 @@
 const User = require('../models/usersModel');
 const { ObjectId } = require('mongodb');
 const mongodb = require('../data/database');
+const mongoose = require('mongoose');
 
 // Get all users from the Users database
 const getUsers = async (req, res) => {
@@ -14,6 +15,13 @@ const getUsers = async (req, res) => {
 
 // Get a single user by Id
 const getUserById = async (req, res) => {
+  //#swagger.tags=['Users']
+
+  const id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid user ID' });
+  }
+
   try {
     const user = await User.findById(req.params.id);
     if (!user) {
@@ -79,7 +87,7 @@ const deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
 
-    if (!deleteUser) {
+    if (!deletedUser) {
       return res.status(404).json({ error: 'User not found' });
     }
 

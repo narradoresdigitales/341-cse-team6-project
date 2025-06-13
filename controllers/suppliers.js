@@ -20,6 +20,14 @@ const getAll = async (req, res) => {
 
 // GET single supplier
 const getSingle = async (req, res) => {
+  //#swagger.tags=['Suppliers']
+
+  const id = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid supplier ID' });
+  }
+
   try {
     const supplierId = new ObjectId(String(req.params.id));
     const result = await mongodb

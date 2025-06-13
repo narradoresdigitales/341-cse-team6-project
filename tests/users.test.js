@@ -49,4 +49,11 @@ describe('Users API', () => {
     expect(res.statusCode).toBe(404);
     expect(res.body).toHaveProperty('error', 'User not found.');
   });
+
+  it('GET /users/:id - returns 400 if ID format is invalid', async () => {
+  const invalidId = 'invalid-id';
+  const res = await request(app).get(`/users/${invalidId}`);
+  expect(res.statusCode).toBe(400);
+  expect(res.body).toHaveProperty('error', 'Invalid user ID');
+  });
 });
