@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 
 // Get all users from the Users database
 const getUsers = async (req, res) => {
-  //#swagger.tags=['Users']
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -36,7 +35,6 @@ const getUserById = async (req, res) => {
 
 // Create a new user
 const createUser = async (req, res) => {
-  //#swagger.tags=['Users']
   try {
     const { githubId, username, displayName, isAdmin = false } = req.body;
 
@@ -86,7 +84,6 @@ const updateUser = async (req, res) => {
 
 // Delete a user
 const deleteUser = async (req, res) => {
-  //#swagger.tags=['Users']
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
 

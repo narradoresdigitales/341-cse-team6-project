@@ -2,7 +2,6 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
-  //#swagger.tags=['Events']
   try {
     const result = await mongodb.getDatabase().db().collection('events').find();
     const events = await result.toArray();
@@ -25,8 +24,7 @@ const getSingle = async (req, res) => {
   if (!ObjectId.isValid(id)) {
     return res.status(400).json({ message: 'Invalid event ID'});
   }
-  
-  
+
   try {
     const eventId = new ObjectId(String(req.params.id));
     const result = await mongodb
@@ -47,7 +45,6 @@ const getSingle = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
-  //#swagger.tags=['Events']
   try {
     const event = {
       title: req.body.title,
@@ -79,7 +76,6 @@ const createEvent = async (req, res) => {
 };
 
 const updateEvent = async (req, res) => {
-  //#swagger.tags=['Events']
   console.log('Request body:', req.body);
   try {
     const eventId = new ObjectId(String(req.params.id));
@@ -113,7 +109,6 @@ const updateEvent = async (req, res) => {
 };
 
 const deleteEvent = async (req, res) => {
-  //#swagger.tags=['Events']
   try {
     const eventId = new ObjectId(String(req.params.id));
     const response = await mongodb

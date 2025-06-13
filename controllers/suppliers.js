@@ -3,7 +3,6 @@ const ObjectId = require('mongodb').ObjectId;
 
 // GET all suppliers
 const getAll = async (req, res) => {
-  //#swagger.tags=['Suppliers']
   try {
     const result = await mongodb.getDatabase().db().collection('suppliers').find();
     const suppliers = await result.toArray();
@@ -50,7 +49,6 @@ const getSingle = async (req, res) => {
 
 // POST create supplier
 const createSupplier = async (req, res) => {
-  //#swagger.tags=['Suppliers']
   try {
     const supplier = {
       companyName: req.body.companyName,
@@ -91,7 +89,6 @@ const createSupplier = async (req, res) => {
 
 // PUT update supplier
 const updateSupplier = async (req, res) => {
-  //#swagger.tags=['Suppliers']
   try {
     const supplierId = new ObjectId(String(req.params.id));
     const updatedSupplier = {
@@ -131,7 +128,6 @@ const updateSupplier = async (req, res) => {
 
 // DELETE supplier
 const deleteSupplier = async (req, res) => {
-  //#swagger.tags=['Suppliers']
   try {
     const supplierId = new ObjectId(String(req.params.id));
     const response = await mongodb

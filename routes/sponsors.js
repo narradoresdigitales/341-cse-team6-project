@@ -7,9 +7,17 @@ const {
 const handleValidationErrors = require('../middleware/validateResult');
 const { isAdmin } = require('../middleware/authenticate');
 
-router.get('/', isAdmin, sponsorsController.getAll);
+router.get(
+    '/',
+    //#swagger.tags = ['Sponsors']
+    //#swagger.summary = "Requires Admin"
+    isAdmin, 
+    sponsorsController.getAll
+);
 router.get(
   '/:id',
+    //#swagger.tags = ['Sponsors']
+    //#swagger.summary = "Requires Admin"
   isAdmin,
   validateSponsorId,
   handleValidationErrors,
@@ -18,6 +26,22 @@ router.get(
 
 router.post(
   '/',
+  /* 
+    #swagger.tags = ['Sponsors']
+    #swagger.summary = "Requires Admin"
+    #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Sponsor fields to use',
+      required: true,
+      schema: {
+        name: "string",
+        email: "example@email.com",
+        phone: "1234567890",
+        website: "example.com",
+        supplierID: "string"
+      }
+    }
+  */ 
   isAdmin,
   validateSponsor,
   handleValidationErrors,
@@ -26,6 +50,22 @@ router.post(
 
 router.put(
   '/:id',
+  /* 
+    #swagger.tags = ['Sponsors']
+    #swagger.summary = "Requires Admin"
+    #swagger.parameters['body'] = {
+      in: 'body',
+      description: 'Sponsor fields to update',
+      required: true,
+      schema: {
+        name: "string",
+        email: "example@email.com",
+        phone: "1234567890",
+        website: "example.com",
+        supplierID: "string"
+      }
+    }
+  */ 
   isAdmin,
   validateSponsorId,
   validateSponsor,
@@ -35,6 +75,8 @@ router.put(
 
 router.delete(
   '/:id',
+    //#swagger.tags = ['Sponsors']
+    //#swagger.summary = "Requires Admin"
   isAdmin,
   validateSponsorId,
   handleValidationErrors,

@@ -2,7 +2,6 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
-    //#swagger.tags=['Sponsors']
     try {
         const result = await mongodb.getDatabase().db().collection('sponsors').find();
         const sponsors = await result.toArray();
@@ -43,7 +42,6 @@ const getSingle = async (req, res) => {
 }
 
 const createSponsor = async (req, res) => {
-    //#swagger.tags=['Sponsors']
     try {
         const { name, email, phone, website, supplierID } = req.body;
 
@@ -68,7 +66,6 @@ const createSponsor = async (req, res) => {
 }
 
 const updateSponsor = async (req, res) => {
-    //#swagger.tags=['Sponsors']
     try {
         const sponsorId = new ObjectId(req.params.id);
         const { name, email, phone, website, supplierID } = req.body;
@@ -89,7 +86,6 @@ const updateSponsor = async (req, res) => {
 }
 
 const deleteSponsor = async (req, res) => {
-    //#swagger.tags=['Sponsors']
     try {
         const sponsorId = new ObjectId(req.params.id);
         const response = await mongodb.getDatabase().db().collection('sponsors').deleteOne({ _id: sponsorId});
