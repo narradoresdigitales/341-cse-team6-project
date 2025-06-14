@@ -5,10 +5,10 @@
     "description": "Event Management Api",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "three41-cse-team6-project.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/login": {
@@ -275,7 +275,7 @@
         "tags": [
           "Users"
         ],
-        "summary": "Requires Admin",
+        "summary": "Requires Authentication",
         "description": "",
         "responses": {
           "200": {
@@ -283,9 +283,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
@@ -354,6 +351,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "401": {
             "description": "Unauthorized"

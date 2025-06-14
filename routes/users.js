@@ -11,19 +11,19 @@ const { isAuthenticated, isAdmin } = require('../middleware/authenticate');
 
 // Route to get all users
 router.get(
-  '/', 
+  '/',
   //#swagger.tags = ['Users']
-  //#swagger.summary = "Requires Admin"
-  isAdmin, 
+  //#swagger.summary = "Requires Authentication"
+  isAuthenticated,
   getUsers
 );
 
 // Route to get a user by Id
 router.get(
-  '/:id', 
+  '/:id',
   //#swagger.tags = ['Users']
   //#swagger.summary = "Requires Admin"
-  isAdmin, 
+  isAdmin,
   getUserById
 );
 
@@ -72,10 +72,10 @@ router.put(
 
 // Route to delete a user
 router.delete(
-  '/:id', 
+  '/:id',
   //#swagger.tags = ['Users']
   //#swagger.summary = "Requires Admin"
-  isAdmin, 
+  isAdmin,
   deleteUser
 );
 
